@@ -1,0 +1,16 @@
+[2018-10-15T15:10:37.575] [INFO] cheese - send mail success { from: 'undefined <2811863274@qq.com>',
+  to: '2811863274@qq.com',
+  subject: 'undefined社区帐号激活',
+  html: '<p>您好：chuck</p><p>我们收到您在undefined社区的注册信息，请点击下面的链接来激活帐户：</p><a href  = "http://localhost/active_account?key=a2aeefa6c949904ddd6190023304c134&name=chuck">激活链接</a><p>若您没有在undefined社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>undefined社区 谨上。</p>' }
+[2018-10-15T15:22:10.765] [INFO] cheese - send mail success { from: 'chuckClub <2811863274@qq.com>',
+  to: 'chen_l@supersoco.com',
+  subject: 'chuckClub社区帐号激活',
+  html: '<p>您好：chen_l</p><p>我们收到您在chuckClub社区的注册信息，请点击下面的链接来激活帐户：</p><a href  = "http://localhost/active_account?key=79a85ac36af656801bba0960c1ebeb17&name=chen_l">激活链接</a><p>若您没有在chuckClub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>chuckClub社区 谨上。</p>' }
+[2018-10-15T16:54:17.315] [INFO] cheese - send mail success { from: 'chuckClub <2811863274@qq.com>',
+  to: 'chen_l@supersoco.com',
+  subject: 'chuckClub社区帐号激活',
+  html: '<p>您好：chen_l</p><p>我们收到您在chuckClub社区的注册信息，请点击下面的链接来激活帐户：</p><a href  = "http://localhost/active_account?key=958be4edd75b5b809e114a914f67d050&name=chen_l">激活链接</a><p>若您没有在chuckClub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>chuckClub社区 谨上。</p>' }
+[2018-10-17T10:32:42.020] [INFO] cheese - send mail success { from: 'chuckClub <2811863274@qq.com>',
+  to: 'chen_l@supersoco.com',
+  subject: 'chuckClub社区帐号激活',
+  html: '<p>您好：chen_l</p><p>我们收到您在chuckClub社区的注册信息，请点击下面的链接来激活帐户：</p><a href  = "http://localhost:3000/api/v1/active_account?key=958be4edd75b5b809e114a914f67d050&name=chen_l">激活链接</a><p>若您没有在chuckClub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>chuckClub社区 谨上。</p>' }

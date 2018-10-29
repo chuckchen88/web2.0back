@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>socket.io测试</title>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <input type="text" id="input"><button>发送</button><br>
+    <span id="span"></span>
+    <script type="text/javascript">
+        var socket = io.connect('http://192.168.1.243:3000');
+        socket.on('connected', function(data){
+            console.log(data);
+        })
+        $('button').click(function () {
+            var message = $('#input').val();
+            socket.emit('message',message);
+        })
+        socket.on('getmessage', function (data) {
+            $('#input').val('');
+            $('#span').append(data+'<br>');
+        })
+
+    </script>
+</body>
+</html>

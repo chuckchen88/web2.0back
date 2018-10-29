@@ -1,0 +1,7 @@
+{
+  "name": "查克个人博客接口文档",
+  "version": "1.0.0",
+  "description": "node+mongodb+redis+apidoc",
+  "title": "接口文档",
+  "url" : "http://localhost:3000/api"
+}
