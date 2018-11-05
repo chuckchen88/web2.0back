@@ -1,0 +1,19 @@
+.top{
+    border-bottom:1px solid #ddd;
+    padding:12px;
+}
+.table-content{
+    padding:10px;
+}
+.pagination ul > li {
+    display: inline;
+}
+.pagination li.disabled.active a{
+    color: #fff;
+    background:#009688;
+}
+.pagination ul > .disabled > a{
+    color: #999999;
+    cursor: default;
+    background-color: transparent;
+}

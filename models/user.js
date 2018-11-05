@@ -19,7 +19,11 @@ var UserSchema = new Schema({
     create_at: { type: Date, default: Date.now },
     update_at: { type: Date, default: Date.now },
     accessToken: {type: String},
-    active: { type: Boolean, default: false }
+    active: { type: Boolean, default: false },
+
+    //重置密码使用 链接过期时间24小时
+    retrieve_time: {type: Number},
+    retrieve_key: {type: String},
 })
 UserSchema.plugin(BaseModel)
 

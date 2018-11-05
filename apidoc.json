@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "description": "node+mongodb+redis+apidoc",
   "title": "接口文档",
-  "url" : "http://localhost:3000/api"
+  "url" : "http://localhost:2018/api"
 }

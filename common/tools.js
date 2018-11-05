@@ -51,3 +51,22 @@ exports.bcompare = function (str, hash, callback) {
 exports.responseData = function(code,message,data){
     return {code:code,msg:message,data:data};
 }
+
+/**
+ *
+ * @param message
+ * @param res
+ */
+exports.errorMessage = function (message,res){
+    var result=`<script>alert('${message}');history.back()</script>`;
+    res.send(result)
+}
+/**
+ *
+ * @param message
+ * @param res
+ */
+exports.successMessage = function (url, message,res){
+    var result=`<script>alert('${message}');location.href='${url}';</script>`;
+    res.send(result)
+}

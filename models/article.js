@@ -4,13 +4,14 @@
 var mongoose = require('mongoose')
 var BaseModel = require('./base_model')
 var Schema = mongoose.Schema
-//var ObjectId = Schema.ObjectId       //
+var ObjectId = Schema.ObjectId       //
 
 //定义schema
 var ArticleSchema = new Schema({
     title: {type: String},
     content: {type: String},
-    author_id: {type: Number},
+    main_img: {type: String},
+    tab_id: {type: ObjectId},
     reply_count: {type: Number, default: 0},
     visit_count: {type: Number, default: 0},
     create_at: {type: Date, default: Date.now},

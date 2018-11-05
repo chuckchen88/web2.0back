@@ -17,6 +17,9 @@ mongoose.connect(config.db, {
 //modles
 require('./article')
 require('./user')
+require('./tab')
 
 exports.User = mongoose.model('User')
+exports.Tab = mongoose.model('Tab')
+exports.Article = mongoose.model('Article')
 

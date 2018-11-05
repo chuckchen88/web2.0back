@@ -3,6 +3,7 @@ var UserProxy  = require('../proxy').User;
 var mongoose   = require('mongoose');
 var UserModel  = mongoose.model('User');
 var responseData = require('../common/tools').responseData;  //统一返回数据封装
+var eventproxy = require('eventproxy');
 
 
 /**
@@ -23,7 +24,6 @@ exports.adminRequired = function (req, res, next) {
  */
 exports.userRequired = function (req, res, next) {
     if (!req.session || !req.session.user || !req.session.user._id) {
-        res.status(403)
         return res.json(responseData(403,'你还没有登录。'))
     }
     next();
@@ -58,18 +58,18 @@ exports.authUser = function (req, res, next) {
     ep.fail(next);
 
     // Ensure current_user always has defined.
-    res.locals.current_user = null;
+    //res.locals.current_user = null;
 
     ep.all('get_user', function (user) {
         if (!user) {
             return next();
         }
-        user = res.locals.current_user = req.session.user = new UserModel(user);
-
+        user = req.session.user = new UserModel(user);
         if (config.admins.hasOwnProperty(user.loginname)) {
             user.is_admin = true;
+            return next();
         }
-
+        return next();
     });
 
     if (req.session.user) {

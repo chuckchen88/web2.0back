@@ -7,12 +7,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');  //后台管理
 
 var apiRouterV1 = require('./routes/api_router_v1'); //api路由
 var cors = require('cors');  //跨域
 var config = require('./config')
 var app = express();
+var auth = require('./middlewares/auth');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,10 +39,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }));
+app.use(auth.authUser);
 
+//路由
 app.use('/api/v1', cors(), apiRouterV1);
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', indexRouter);  //测试
+app.use('/admin', adminRouter); //后台管理
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,55 @@
+<% include header.ejs %>
+<div class="top">
+    <span class="layui-breadcrumb" lay-separator="/">
+        <a href="">博客管理</a>
+        <a href="">栏目列表</a>
+        <a><cite>编辑栏目</cite></a>
+    </span>
+</div>
+<div class="table-content">
+    <div class="btns-self">
+
+    </div>
+    <div>
+        <form class="layui-form" action="/admin/tabs/update" method="post">
+            <div class="layui-form-item">
+                <label class="layui-form-label">栏目名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="tabname" required  lay-verify="required" placeholder="请输入栏目名称" autocomplete="off" class="layui-input" value="<%= tab.tab_name %>">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">栏目描述</label>
+                <div class="layui-input-block">
+                    <textarea name="tabdesc" placeholder="请输入内容" class="layui-textarea"><%= tab.tab_desc %></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">排序</label>
+                <div class="layui-input-block">
+                    <input type="number" name="order_num" placeholder="请输入数字" required  lay-verify="required" class="layui-input" autocomplete="off" value="<%= tab.order_num %>">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="hidden" name="tab_id" value="<%= tab._id %>">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="test1"></div>
+</div>
+<% include footer.ejs %>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            //layer.msg(JSON.stringify(data.field));
+
+        });
+    });
+</script>

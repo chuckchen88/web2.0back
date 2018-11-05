@@ -37,6 +37,7 @@ var config = {
     //日志目录
     log_dir: path.join(__dirname, 'logs'),
     //域名
-    host: 'localhost:3000'
+    host: 'localhost:2018',
+    upload:'/upload' ,//public下文件上传路径 需手动创建 无需包含/public
 }
 module.exports = config

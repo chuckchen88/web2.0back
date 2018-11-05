@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta http-equiv='refresh' content='2,url=<%=urlPath%>'></meta>
+</head>
+<body>
+<p><%=message%>: <span id='code'></span></p>
+<script>
+    var int = 2
+    function countdown() {
+        document.getElementById("code").innerHTML = int + "秒后页面跳转";
+        int--;
+        if(int<0){
+            var i = window.clearInterval(i)//结束
+            int = 2; //重新赋值
+        }
+    }
+    countdown();
+    setInterval(countdown,1000);
+</script>
+</body>
+</html>

@@ -59,6 +59,33 @@ exports.getUserByMail = function (email, callback) {
     User.findOne({email: email}, callback);
 };
 /**
+ * 根据用户ID，查找用户
+ * Callback:
+ * - err, 数据库异常
+ * - user, 用户
+ * @param {String} id 用户ID
+ * @param {Function} callback 回调函数
+ */
+exports.getUserById = function (id, callback) {
+    if (!id) {
+        return callback();
+    }
+    User.findOne({_id: id}, callback);
+};
+/**
+ * 根据查询条件，获取一个用户
+ * Callback:
+ * - err, 数据库异常
+ * - user, 用户
+ * @param {String} name 用户名
+ * @param {String} key 激活码
+ * @param {Function} callback 回调函数
+ */
+exports.getUserByNameAndKey = function (loginname, key, callback) {
+    User.findOne({loginname: loginname, retrieve_key: key}, callback);
+};
+
+/**
  * 生成头像链接
  * @param email
  * @returns {string}

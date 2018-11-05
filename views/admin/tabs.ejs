@@ -1,0 +1,65 @@
+<% include header.ejs %>
+<div class="top">
+    <span class="layui-breadcrumb" lay-separator="/">
+        <a href="">博客管理</a>
+        <a><cite>栏目列表</cite></a>
+    </span>
+</div>
+<div class="table-content">
+    <div class="btns-self">
+        <a href="/admin/tabs/add" class="layui-btn">
+            <i class="layui-icon">&#xe608;</i> 添加
+        </a>
+    </div>
+    <div class="">
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>栏目名称</th>
+                <th>描述</th>
+                <th>排序</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% tabs.forEach(function(tab){ %>
+            <tr>
+                <td><%= tab.tab_name %></td>
+                <td><%= tab.tab_desc %></td>
+                <td><%= tab.order_num %></td>
+                <td><%= tab.create_at_ago() %></td>
+                <td>
+                    <a href="/admin/tabs/edit/<%= tab._id %>" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon">&#xe642;</i></a>
+                    <a href="javascript:;" onclick="return confirmDelete('<%= tab._id %>')" class="layui-btn layui-btn-primary layui-btn-sm"><i class="layui-icon">&#xe640;</i></a>
+                </td>
+            </tr>
+            <% }) %>
+            </tbody>
+        </table>
+        <%- include('pagination', {
+            pages: pages,
+            current_page: current_page,
+            base: '/admin/tabs/'
+        }) %>
+    </div>
+</div>
+<% include footer.ejs %>
+<script>
+    layui.use('layer', function(){
+
+    });
+    function confirmDelete(id){
+        //eg1
+        layer.confirm('确认删除吗?', {icon: 3, title:'提示'}, function(index){
+            //do something
+            layer.close(index);
+            location.href = '/admin/tabs/delete/'+id;
+        });
+    }
+</script>

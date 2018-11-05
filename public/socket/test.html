@@ -10,7 +10,7 @@
     <input type="text" id="input"><button>发送</button><br>
     <span id="span"></span>
     <script type="text/javascript">
-        var socket = io.connect('http://192.168.1.243:3000');
+        var socket = io.connect('http://localhost:2018');
         socket.on('connected', function(data){
             console.log(data);
         })

@@ -16,20 +16,24 @@
     "express": "~4.16.0",
     "express-session": "^1.15.6",
     "http-errors": "~1.6.2",
+    "layui-src": "^2.3.0",
+    "lodash": "^4.17.11",
     "log4js": "^3.0.6",
     "moment": "^2.22.2",
     "mongoose": "^5.3.3",
     "morgan": "~1.9.0",
+    "multer": "^1.4.1",
     "nodemailer": "^4.6.8",
     "socket.io": "^2.1.1",
     "util": "^0.11.0",
     "utility": "^1.15.0",
     "uuid": "^3.3.2",
-    "validator": "^10.8.0"
+    "validator": "^10.8.0",
+    "vue2-toast": "^2.0.2"
   },
   "apidoc": {
     "title": "接口文档",
-    "url": "http://localhost:3000/api",
-    "sampleUrl": "http://localhost:3000/api"
+    "url": "http://localhost:2018/api",
+    "sampleUrl": "http://localhost:2018/api"
   }
 }
