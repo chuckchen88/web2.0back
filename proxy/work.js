@@ -1,17 +1,24 @@
 var models = require('../models')
-var Tab = models.Tab
+var Work = models.Work
 
 /**
  * 添加栏目
+ * @param name
+ * @param loginname
+ * @param pass
+ * @param email
+ * @param avatar_url
  * @param callback
  */
-exports.newAndSave = function(tab_name,tab_desc,order_num,callback){
-    var tab = new Tab()
-    tab.tab_name = tab_name
-    tab.tab_desc = tab_desc
-    tab.order_num = order_num
+exports.newAndSave = function(work_name,work_desc,order_num,type,main_img,callback){
+    var work = new Work()
+    work.work_name = work_name
+    work.work_desc = work_desc
+    work.order_num = order_num
+    work.type = type
+    work.main_img = main_img
 
-    tab.save(callback)
+    work.save(callback)
 }
 
 /**
@@ -23,15 +30,15 @@ exports.newAndSave = function(tab_name,tab_desc,order_num,callback){
  * @param {Object} opt 搜索选项
  * @param {Function} callback 回调函数
  */
-exports.getTabsByQuery = function (query, opt, callback) {
-    Tab.find(query, {}, opt, function (err, tabs) {
+exports.getWorksByQuery = function (query, opt, callback) {
+    Work.find(query, {}, opt, function (err, works) {
         if (err) {
             return callback(err);
         }
-        if (tabs.length === 0) {
+        if (works.length === 0) {
             return callback(null, []);
         }
-        return callback(null, tabs);
+        return callback(null, works);
     });
 };
 
@@ -44,18 +51,20 @@ exports.getTabsByQuery = function (query, opt, callback) {
  * @param {Function} callback 回调函数
  */
 exports.getCountByQuery = function (query, callback) {
-    Tab.count(query, callback);
+    Work.count(query, callback);
 };
 
 /**
  * 根据ID
  * Callback:
  * - err, 数据库异常
+ * - user, 用户
+ * @param {String} id 用户ID
  * @param {Function} callback 回调函数
  */
-exports.getTabById = function (id, callback) {
+exports.getWorkById = function (id, callback) {
     if (!id) {
         return callback();
     }
-    Tab.findOne({_id: id,is_deleted:false}, callback);
+    Work.findOne({_id: id,is_deleted:false}, callback);
 };

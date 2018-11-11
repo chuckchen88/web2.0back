@@ -55,7 +55,6 @@ exports.getArticlesByQuery = function(query, opt, callback){
             });
 
             Tab.getTabById(article.tab_id, ep.done('tab'));
-
         });
     });
 }

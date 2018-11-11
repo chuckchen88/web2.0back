@@ -62,3 +62,7 @@
   to: 'chen_l@supersoco.com',
   subject: 'chuckClub社区密码重置',
   html: '<p>您好：chen_l</p><p>我们收到您在chuckClub社区重置密码的请求，请在24小时内单击下面的链接来重置密码：</p><a href="http://localhost:2018/#/ChangePass/7ff9a739-9e2e-498c-9fbb-af895068fa96/chen_l">重置密码链接</a><p>若您没有在chuckClub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>chuckClub社区 谨上。</p>' }
+[2018-11-11T16:20:09.971] [INFO] cheese - send mail success { from: 'chuckClub <2811863274@qq.com>',
+  to: '569205839@qq.com',
+  subject: 'chuckClub社区帐号激活',
+  html: '<p>您好：chuckchen</p><p>我们收到您在chuckClub社区的注册信息，请点击下面的链接来激活帐户：</p><a href  = "http://localhost:2018/#/AccountActive/9bfa5b75b2948c9c2afe55d959e757e8/chuckchen">激活链接</a><p>若您没有在chuckClub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>chuckClub社区 谨上。</p>' }

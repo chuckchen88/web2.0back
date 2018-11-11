@@ -14,7 +14,7 @@ exports.index = function(req, res, next){
     proxy.fail(next);
 
     var query = {'deleted':false}
-    var options = { skip: (page - 1) * limit, limit: limit}
+    var options = { skip: (page - 1) * limit, limit: limit, sort: [{'create_at': -1}]}
 
 
     Article.getCountByQuery(query, proxy.done(function (all_topics_count) {

@@ -18,8 +18,16 @@ mongoose.connect(config.db, {
 require('./article')
 require('./user')
 require('./tab')
+require('./work')
+require('./leavewords')
+require('./message')
+require('./sys')
 
 exports.User = mongoose.model('User')
 exports.Tab = mongoose.model('Tab')
 exports.Article = mongoose.model('Article')
+exports.Work = mongoose.model('Work')
+exports.LeaveWord = mongoose.model('LeaveWord')
+exports.Message = mongoose.model('Message')
+exports.Sys = mongoose.model('Sys')
 

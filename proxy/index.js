@@ -1,3 +1,7 @@
 exports.User = require('./user')
 exports.Article = require('./article')
 exports.Tab = require('./tab')
+exports.Work = require('./work')
+exports.LeaveWord = require('./leaveword')
+exports.Message = require('./message')
+exports.Sys = require('./sys')
