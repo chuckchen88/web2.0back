@@ -12,13 +12,18 @@ var articleController = require('../api/v1/article')   //文章
 var signController = require('../api/v1/sign')   //
 var userController = require('../api/v1/user')   //
 var leavewordController = require('../api/v1/leaveword')   //
+var commentController = require('../api/v1/comment')   //
 var sysController = require('../api/v1/sys')   //
+var workController = require('../api/v1/work')   //
+var tabController = require('../api/v1/tab')   //
 var upload = require('../common/upload')
 var config = require('../config')
 
 /* 文章 */
-router.get('/articlelist', articleController.show); //列表
-router.post('/article/create', articleController.create); //创建
+router.get('/articlelist/:tab_id/:page', articleController.articleList); //列表
+router.get('/articlelist/:id', articleController.artDetails); //详情
+router.get('/artfabulous/:id',auth.userRequired, articleController.fabulous); //点赞 需要登录
+router.get('/tablist', tabController.index); //列表
 
 /* 登陆注册模块 */
 router.post('/signup', signController.signup);  //注册
@@ -35,6 +40,7 @@ router.get('/getuserinfo',auth.userRequired, userController.getUserInfoBySession
 router.get('/getuserinfo/notreadcount',auth.userRequired, userController.hasNotReadCount);
 router.get('/getuserinfo/mynews',auth.userRequired, userController.getUserNews);
 router.get('/myNews/hasReadOne/:id',auth.userRequired, userController.hasReadOne);
+router.get('/getMyArticles/:page',auth.userRequired, articleController.getFabulousArticles);
 
 //系统消息
 router.get('/sysmsgs',auth.userRequired, sysController.sysmsgs);
@@ -46,6 +52,12 @@ router.get('/leaveWord/delete/:id',auth.userRequired, leavewordController.delete
 router.get('/leaveWord/fabulous/:id',auth.userRequired, leavewordController.fabulous);
 router.get('/leaveWordList',leavewordController.words);
 
+/*文章评论*/
+router.get('/commentList/:id',commentController.commentList);
+router.post('/commentAdd',auth.userRequired, commentController.add);
+router.get('/comment/fabulous/:id',auth.userRequired, commentController.fabulous);
+router.get('/comment/delete/:id',auth.userRequired, commentController.delete);
+
 /* 检测是否登录 */
 router.get('/checkLogin',auth.userRequired,function(req,res,next){
     res.json({"code":0,"msg":"已登录"})
@@ -56,5 +68,7 @@ router.post('/upload',auth.userRequired,upload.single('file'), function (req, re
     res.json({"code": 0,"msg": "图片上传成功","data": {"src": config.upload+'/'+req.file.filename,"title":req.file.filename}})
 });
 
+/* 作品 */
+router.get('/worklist', workController.index); //列表
 
 module.exports = router;

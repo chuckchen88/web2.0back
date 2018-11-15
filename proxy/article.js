@@ -84,3 +84,46 @@ exports.getArticleById = function (id, callback) {
     }
     Article.findOne({_id: id}, callback);
 };
+/**
+ * 点赞某篇文章
+ * @param user_id
+ * @param article_id
+ * @param callback
+ * @returns {*}
+ */
+exports.fabulousAddUser= function(user_id,article_id,callback){
+    if (!user_id || !article_id) {
+        return callback();
+    }
+    Article.update({_id:article_id}, {$addToSet: {fabulous_users: user_id}}, callback);  // addToSet想数组中添加数据
+}
+/**
+ * 取消点赞某篇文章
+ * @param user_id
+ * @param article_id
+ * @param callback
+ * @returns {*}
+ */
+exports.fabulousRemoveUser= function(user_id,article_id,callback){
+    if (!user_id || !article_id) {
+        return callback();
+    }
+    Article.update({_id:article_id}, {$pull: {fabulous_users: user_id}}, callback);
+}
+/**
+ * 获取点赞过得文章
+ * @param user_id
+ * @param callback
+ */
+exports.getFabulousArticlesByUserId = function (query, opt, callback) {
+    Article.find(query, {}, opt, function (err, articles) {
+        if (err) {
+            return callback(err);
+        }
+        if (articles.length === 0) {
+            return callback(null, []);
+        }
+        articles = _.compact(articles); // 删除不合规的 topic
+        return callback(null, articles);
+    });
+}

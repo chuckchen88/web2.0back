@@ -44,7 +44,7 @@ exports.getTabsByQuery = function (query, opt, callback) {
  * @param {Function} callback 回调函数
  */
 exports.getCountByQuery = function (query, callback) {
-    Tab.count(query, callback);
+    Tab.countDocuments(query, callback);
 };
 
 /**

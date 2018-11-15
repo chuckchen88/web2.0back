@@ -10,13 +10,14 @@ var Work = models.Work
  * @param avatar_url
  * @param callback
  */
-exports.newAndSave = function(work_name,work_desc,order_num,type,main_img,callback){
+exports.newAndSave = function(work_name,work_desc,order_num,type,main_img,work_src,callback){
     var work = new Work()
     work.work_name = work_name
     work.work_desc = work_desc
     work.order_num = order_num
     work.type = type
     work.main_img = main_img
+    work.work_src = work_src
 
     work.save(callback)
 }

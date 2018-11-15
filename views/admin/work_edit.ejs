@@ -28,6 +28,12 @@
                     </select>
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">作品链接</label>
+                <div class="layui-input-block">
+                    <input type="text" name="work_src" required  lay-verify="required" placeholder="作品链接绝对地址" autocomplete="off" class="layui-input" value="<%= work.work_src %>">
+                </div>
+            </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">排序</label>
                 <div class="layui-input-block">

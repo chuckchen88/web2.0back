@@ -14,6 +14,7 @@ var ArticleSchema = new Schema({
     tab_id: {type: ObjectId},
     reply_count: {type: Number, default: 0},
     visit_count: {type: Number, default: 0},
+    fabulous_users:{type:Array,default:[]},  //点赞的用户ID组
     create_at: {type: Date, default: Date.now},
     update_at: {type:Date, default: Date.now},
     deleted: {type:Boolean, default: false}

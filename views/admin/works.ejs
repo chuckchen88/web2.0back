@@ -31,7 +31,7 @@
             <tbody>
             <% works.forEach(function(work){ %>
             <tr>
-                <td><%= work.work_name %></td>
+                <td><a href="<%= work.work_src %>"><%= work.work_name %></a></td>
                 <td><%= work.work_desc %></td>
                 <td><%= work.order_num %></td>
                 <td><%= work.type? '个人' : '公司' %></td>

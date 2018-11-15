@@ -38,7 +38,7 @@ var getUserNews = function (req, res, next) {
     MessageProxy.getMessageByUserId(user_id, ep.done(function (msgs) {
         data.msgs = msgs.map(function (msg) {
             msg.user = _.pick(msg.user, ['loginname', 'avatar','_id']);
-            msg = _.pick(msg, ['_id', 'user', 'author_id', 'has_read', 'create_at', 'master_id','reply_id','type']);
+            msg = _.pick(msg, ['_id', 'user', 'author_id', 'has_read', 'create_at', 'master_id','reply_id','type','article_id']);
             return msg;
         });
 

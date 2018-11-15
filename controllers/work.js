@@ -41,13 +41,14 @@ exports.create = function (req, res, next) {
     var order_num     = validator.trim(req.body.order_num);
     var type     = validator.trim(req.body.type);
     var main_img     = validator.trim(req.body.main_img);
+    var work_src     = validator.trim(req.body.work_src);
 
     var ep = new eventproxy();
     ep.fail(next);
     ep.on('prop_err', function (msg) {
         return tools.errorMessage('创建失败',res);
     });
-    Work.newAndSave(workname, workdesc, order_num, type, main_img, function (err) {
+    Work.newAndSave(workname, workdesc, order_num, type, main_img, work_src, function (err) {
         if (err) {
             return next(err);
         }
@@ -78,6 +79,7 @@ exports.update = function (req, res, next) {
     var order_num     = validator.trim(req.body.order_num);
     var type     = validator.trim(req.body.type);
     var main_img     = validator.trim(req.body.main_img);
+    var work_src     = validator.trim(req.body.work_src);
     var work_id     = validator.trim(req.body.work_id);
 
     Work.getWorkById(work_id, function (err, work) {
@@ -90,6 +92,7 @@ exports.update = function (req, res, next) {
         work.order_num       = order_num;
         work.type       = type;
         work.main_img       = main_img;
+        work.work_src       = work_src;
         work.update_at = new Date();
 
         work.save(function (err) {

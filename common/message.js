@@ -13,7 +13,7 @@ var _            = require('lodash');
  * @param reply_id
  * @param callback
  */
-exports.sendArtReplyMessage = function (master_id, author_id, topic_id, reply_id, callback) {
+exports.sendArtReplyMessage = function (master_id, author_id, reply_id, article_id,callback) {
     callback = callback || _.noop;
     var ep = new eventproxy();
     ep.fail(callback);
@@ -22,7 +22,7 @@ exports.sendArtReplyMessage = function (master_id, author_id, topic_id, reply_id
     message.type      = 'artReply';
     message.master_id = master_id;
     message.author_id = author_id;
-    message.topic_id  = topic_id;
+    message.article_id  = article_id;
     message.reply_id  = reply_id;
 
     message.save(ep.done('message_saved'));

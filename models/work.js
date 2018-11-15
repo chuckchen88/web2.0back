@@ -11,6 +11,7 @@ var WorkSchema = new Schema({
     work_desc: { type: String},
     main_img: { type: String},
     order_num: { type: Number},
+    work_src: { type: String},
     type: { type: Number},  //0公司 1個人
     is_deleted: { type: Boolean, default: false },
     create_at: { type: Date, default: Date.now },
