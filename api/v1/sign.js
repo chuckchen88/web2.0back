@@ -85,14 +85,14 @@ var signup = function(req, res, next){
             ep.emit('prop_err', '用户名或邮箱已被使用。');
             return;
         }
-        var avatarUrl = UserProxy.makeGravatar(email);
+        var avatarUrl = '/random_head/'+Math.floor(Math.random()*11)+'.jpg'; //0-10随机整数
         tools.bhash(pass, ep.done(function(passhash){
             UserProxy.newAndSave(loginname, loginname, passhash, email, avatarUrl, function (err) {
                 if (err) {
                     return next(err);
                 }
                 mail.sendActiveMail(email, utility.md5(email + passhash + config.session_secret), loginname, baseUrl);
-                return res.json(responseData(200,'大爷！已给您的注册邮箱发送了一封邮件，请点击里面的链接来激活您的帐号。'))
+                return res.json(responseData(200,'您好！已给您的注册邮箱发送了一封邮件，请点击里面的链接来激活您的帐号。'))
             })
         }))
     })
@@ -143,7 +143,7 @@ exports.login = function (req, res, next) {
             }
             if (!user.active) {   //账号还没有激活
                 // 重新发送激活邮件
-               // mail.sendActiveMail(user.email, utility.md5(user.email + passhash + config.session_secret), user.loginname, baseUrl);
+                mail.sendActiveMail(user.email, utility.md5(user.email + passhash + config.session_secret), user.loginname, baseUrl);
                 return res.json(responseData(202,'此帐号还没有被激活，激活链接已发送到 ' + user.email + ' 邮箱，请查收。'))
             }
             // store session cookie
@@ -155,7 +155,7 @@ exports.login = function (req, res, next) {
 };
 
 exports.getsession =  function(req, res, next){
-    res.send(req.session.user)
+    res.send(req.session)
 }
 
 /**

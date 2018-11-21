@@ -55,7 +55,7 @@ exports.getMsgs = function (user_id,cb) {
  * @param callback
  */
 exports.getCountHasNotRead = function (user_id,callback) {
-    Sys.count({has_read_user_ids:{$nin:[user_id]}}).exec(callback)
+    Sys.count({has_read_user_ids:{$nin:[user_id]},deleted:false}).exec(callback)
 }
 
 /**
@@ -68,4 +68,37 @@ exports.getCountHasNotRead = function (user_id,callback) {
  */
 exports.getMessageBySysId = function (sysId, callback) {
     Sys.findOne({_id: sysId,deleted:false}, null, {}, callback);
+};
+
+/**
+ *
+ * Callback:
+ * - err, 数据库错误
+ * - count, 主题列表
+ * @param {String} query 搜索关键词
+ * @param {Object} opt 搜索选项
+ * @param {Function} callback 回调函数
+ */
+exports.getSysByQuery = function (query, opt, callback) {
+    Sys.find(query, {}, opt, function (err, Sys) {
+        if (err) {
+            return callback(err);
+        }
+        if (Sys.length === 0) {
+            return callback(null, []);
+        }
+        return callback(null, Sys);
+    });
+};
+
+/**
+ *
+ * Callback:
+ * - err, 数据库错误
+ * - count, 主题数量
+ * @param {String} query 搜索关键词
+ * @param {Function} callback 回调函数
+ */
+exports.getCountByQuery = function (query, callback) {
+    Sys.countDocuments(query, callback);
 };

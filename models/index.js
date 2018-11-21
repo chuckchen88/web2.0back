@@ -23,6 +23,7 @@ require('./leavewords')
 require('./comment')
 require('./message')
 require('./sys')
+require('./imessage')
 
 exports.User = mongoose.model('User')
 exports.Tab = mongoose.model('Tab')
@@ -32,4 +33,5 @@ exports.LeaveWord = mongoose.model('LeaveWord')
 exports.Comment = mongoose.model('Comment')
 exports.Message = mongoose.model('Message')
 exports.Sys = mongoose.model('Sys')
+exports.Imessage = mongoose.model('Imessage')
 

@@ -16,6 +16,7 @@ var commentController = require('../api/v1/comment')   //
 var sysController = require('../api/v1/sys')   //
 var workController = require('../api/v1/work')   //
 var tabController = require('../api/v1/tab')   //
+var imessageController = require('../api/v1/imessage')   //
 var upload = require('../common/upload')
 var config = require('../config')
 
@@ -33,7 +34,7 @@ router.post('/forgetpass', signController.forgetPass);  //忘记密码  发送�
 router.get('/checkemail/:key/:name', signController.checkEmail);  //忘记密码  验证邮箱
 router.post('/updatePass', signController.updatePass);  //忘记密码  提交
 router.get('/active_account/:key/:name', signController.activeAccount);  //帐号激活
-router.get('/getsession',auth.userRequired, signController.getsession);
+router.get('/getsession', signController.getsession);
 
 /* 个人中心 */
 router.get('/getuserinfo',auth.userRequired, userController.getUserInfoBySession);
@@ -41,6 +42,7 @@ router.get('/getuserinfo/notreadcount',auth.userRequired, userController.hasNotR
 router.get('/getuserinfo/mynews',auth.userRequired, userController.getUserNews);
 router.get('/myNews/hasReadOne/:id',auth.userRequired, userController.hasReadOne);
 router.get('/getMyArticles/:page',auth.userRequired, articleController.getFabulousArticles);
+router.post('/changeAvatar',auth.userRequired, userController.updateAvatar);
 
 //系统消息
 router.get('/sysmsgs',auth.userRequired, sysController.sysmsgs);
@@ -51,6 +53,9 @@ router.post('/leaveAdd',auth.userRequired, leavewordController.add);
 router.get('/leaveWord/delete/:id',auth.userRequired, leavewordController.delete);
 router.get('/leaveWord/fabulous/:id',auth.userRequired, leavewordController.fabulous);
 router.get('/leaveWordList',leavewordController.words);
+
+/*聊天室数据 分页*/
+router.get('/chatlist/:page',imessageController.chatlist);
 
 /*文章评论*/
 router.get('/commentList/:id',commentController.commentList);

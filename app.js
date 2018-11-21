@@ -1,18 +1,16 @@
 var createError = require('http-errors');
 var express = require('express');
-var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');  //后台管理
-
+var cookieParser = require('cookie-parser');
 var apiRouterV1 = require('./routes/api_router_v1'); //api路由
 var cors = require('cors');  //跨域
 var config = require('./config')
 var app = express();
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 var auth = require('./middlewares/auth');
 
 
@@ -23,12 +21,11 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 中间件
 app.use(cookieParser(config.session_secret));   //session_secret:给cookie签名
-app.use(session({
+let sessionMiddleware = session({
     secret: config.session_secret,
     store: new RedisStore({
         port: config.redis_port,
@@ -38,9 +35,9 @@ app.use(session({
     }),
     resave: false,
     saveUninitialized: false,
-}));
-app.use(auth.authUser);
-
+});
+app.use(sessionMiddleware)
+app.use(auth.authUser)
 //路由
 app.use('/api/v1', cors(), apiRouterV1);
 app.use('/', indexRouter);  //测试

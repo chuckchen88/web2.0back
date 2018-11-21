@@ -47,6 +47,30 @@ var getUserNews = function (req, res, next) {
 };
 exports.getUserNews = getUserNews;
 /**
+ * 修改头像
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.updateAvatar = function(req, res, next){
+    var loginname = req.session.user.loginname?req.session.user.loginname:'';
+    var avatar = req.body.avatar;
+    var ep        = new eventproxy();
+    ep.fail(next);
+    UserProxy.getUserByLoginName(loginname, ep.done(function (user) {
+        if (!user) {
+            return res.json(responseData(201,'用户不存在'))
+        }
+        user.avatar = avatar
+        user.save(function(err){
+            if(err){
+                return next(err)
+            }
+            return res.json(responseData(200,'修改成功',user))
+        })
+    }));
+}
+/**
  * 获取未读消息数量
  * @param req
  * @param res

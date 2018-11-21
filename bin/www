@@ -7,8 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('studydemo:server');
 var http = require('http');
-
-
+var imsg = require('../proxy/imessage')
 /**
  * Get port from environment and store in Express.
  */
@@ -19,8 +18,63 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
+/**
+ * Listen on socket.io
+ */
+var io = require('socket.io').listen(server)
+
+/*io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+});*/
+
+let cli_ids = []   //客户端id数组
+io.sockets.on('connection', function (socket) {
+
+    cli_ids.push(socket.id);
+    socket.on('enter',function(data){
+        data.user_count = cli_ids.length
+        io.sockets.emit('connected',data)
+    })
+    socket.on('message', function (data) {
+        imsg.getMessageByTimeType(function(err,msg){
+            if(err){
+                return next(err);
+            }
+            let timeData = {
+                type:'time',
+                create_at:new Date()
+            }
+            if(msg){
+                if(new Date() - msg.create_at > 300000){   //如果超过5分钟 发送时间
+                    imsg.newAndSave(data.content,'time',data.pic,data.user_id,function (err,msg) { })
+                    io.sockets.emit('getmessage',timeData)
+                    io.sockets.emit('getmessage',data)
+                    setTimeout(function(){
+                        imsg.newAndSave(data.content,data.type,data.pic,data.user_id,function (err,msg) { })
+                    },100)
+                }else{
+                    io.sockets.emit('getmessage',data)
+                    imsg.newAndSave(data.content,data.type,data.pic,data.user_id,function (err,msg) { })
+                }
+            }else{
+                imsg.newAndSave(data.content,'time',data.pic,data.user_id,function (err,msg) { })
+                io.sockets.emit('getmessage',timeData)
+                io.sockets.emit('getmessage',data)
+                setTimeout(function(){
+                    imsg.newAndSave(data.content,data.type,data.pic,data.user_id,function (err,msg) { })
+                },100)
+            }
+        })
+    })
+    socket.on('disconnect', function() {
+        cli_ids.splice(cli_ids.indexOf(socket.id), 1)
+        let data = {}
+        data.user_count = cli_ids.length
+        io.sockets.emit('out',data)   //退出房间
+    })
+
+})
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -29,18 +83,6 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * Listen on socket.io
- */
-var io = require('socket.io').listen(server)
-io.sockets.on('connection', function (socket) {
-    socket.emit('connected',{name:'chuck'})
-    socket.on('message', function (data) {
-        io.sockets.emit('getmessage',data)
-    })
-})
-
 
 /**
  * Normalize a port into a number, string, or false.

@@ -43,9 +43,11 @@ router.post('/works/update',auth.adminRequired,workController.update);  //编辑
 router.get('/works/delete/:id',auth.adminRequired,workController.delete);  //编辑动作
 
 /*消息管理模块--系统消息*/
+router.get('/sysmsg',auth.adminRequired,sysController.list);
 router.get('/sysmsg/add',auth.adminRequired,function (req, res, next) {
     res.render('admin/sysmsg_add');
 });
 router.post('/sysmsg/create',auth.adminRequired,sysController.create);  //提交
+router.get('/sysmsg/delete/:id',auth.adminRequired,sysController.delete);  //提交
 
 module.exports = router;
